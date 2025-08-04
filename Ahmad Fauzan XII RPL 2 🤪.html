@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Warkamsi</title>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Tahoma;
+    line-height: 1.6;
+    background: linear-gradient(90deg,hsl(230, 93.5%, 81.8%), hsl(252, 94.7%, 85.1%));
+  }
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    
+  }
+  .header {
+    width: 100%;
+    background: rgba(255,255,255, 0.95);
+    color: hsl(234, 89.5%, 73.9%);
+    padding: 15px;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  .menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  form {
+    margin-top: 80px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+  }
+  input, label, select {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: none;
+  }
+  .footer {
+    display: flex;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 35vh;
+  }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <h1 class="logo"  role="img" aria-label="logo">Warkamsi</h1>
+      <button class="menu-btn"
+            onclick="toggleMenu()">☰</button>
+    </nav>
+  </header>
+  <!-- makanan -->
+  <div class="container" aria-label="form-container">
+    <form action="" id="orderform">
+      <label for="makanan">pilih makanan:</label>
+      <select name="makanan" id="makanan">
+        <option value="10000">Mie Goreng - Rp10.000</option>
+        <option value="10000">Mie Soto - Rp10.000</option>
+        <option value="15000">Mie nyemek - Rp15.000</option>
+        <option value="15000">Mie Bangladesh - Rp15.000</option>
+        <option value="0">Tidak memilih</option>
+        
+      </select>
+      
+      <label for="jumlahMakanan">jumlah</label>
+      <input type="number" name="jumlah" id="jumlahMakanan" min="0" value="1" />
+        
+      <!-- minuman -->  
+      <label for="minuman">pilih minuman:</label>
+      <select name="minuman" id="minuman">
+        <option value="5000">Es Teh Manis - Rp5.000</option>
+        <option value="5000">Es Jeruk - Rp5.000</option>
+        <option value="10000">Es Teler - Rp10.000</option>
+        <option value="0">Tidak memilih</option>
+        
+      </select>
+        
+        <label for="jumlahMinuman">jumlah</label>
+        <input type="number" name="jumlah" id="jumlahMinuman" min="0" value="1" />
+        
+        <p>total harga: <b id="totalharga"></b></p>
+    </form>
+  </div>
+  <footer class="footer">
+      &copy; 2025
+  </footer>
+  <script type="text/javascript" charset="utf-8">
+    const makanan = document.getElementById('makanan');
+    const minuman = document.getElementById('minuman');
+    const jumlahMakanan = document.getElementById('jumlahMakanan');
+    const jumlahMinuman = document.getElementById('jumlahMinuman');
+    
+    function hitungTotal() {
+      const hargaMakanan = parseInt(makanan.value);
+      const hargaMinuman = parseInt(minuman.value);
+      const qtyMakanan = parseInt(jumlahMakanan.value);
+      const qtyMinuman = parseInt(jumlahMinuman.value);
+      
+      const total = (hargaMakanan * qtyMakanan) + (hargaMinuman * qtyMinuman);
+      totalharga.textContent = "Rp" + total.toLocaleString('id-ID');
+    }
+    
+    [makanan, minuman, jumlahMakanan, jumlahMinuman]
+    .forEach(el => {
+      el.addEventListener('input', hitungTotal);
+    });
+    
+    // Set awal
+    hitungTotal();
+  </script>
+</body>
+</html>
